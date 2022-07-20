@@ -68,9 +68,11 @@
 - 신청과 회원의 관계 : 회원은 여러 개의 신청을 갖을 수 있다.(N:1)
 - 신청과 그룹의 관계 : 그룹은 여러 개의 신청을 갖을 수 있다.(N:1)
 
-## 📝 테이블 정의서(Entity Details)
+## 📝 요구사항 분석(Requirements analysis)
 
-- [바로가기](./table_details.md)
+- [바로가기](./요구사항 명세.md)
+
+
 
 ## 🔗 엔티티-관계 모델(Entity Relationship Diagram)
 
