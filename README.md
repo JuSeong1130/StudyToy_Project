@@ -76,7 +76,7 @@
 
 ## 🔗 엔티티-관계 모델(Entity Relationship Diagram)
 
-![Entity_Details](./images/entity_details.png)
+![Entity_Details](./images/image.png)
 
 ## 📐 트러블 슈팅(Trouble Shooting)
 
