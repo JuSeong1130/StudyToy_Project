@@ -70,7 +70,7 @@
 
 ## 📝 요구사항 분석(Requirements analysis)
 
-- [바로가기](./요구사항 명세.md)
+- [바로가기](./Requirements-analysis.md)
 
 
 
