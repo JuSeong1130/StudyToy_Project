@@ -1,5 +1,6 @@
 package com.study.group.entity;
 
+import com.study.member.entity.Member;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -11,11 +12,11 @@ public class MemberGroup {
     private Long memberGroupId;
 
     @ManyToOne
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "groupId")
+    @JoinColumn(name = "GROUP_ID")
     private Group group;
 
     @Column(nullable = false)
