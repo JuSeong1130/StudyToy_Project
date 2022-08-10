@@ -2,11 +2,13 @@ package com.study.member.entity;
 
 import com.study.audit.Auditable;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Member extends Auditable {
 
