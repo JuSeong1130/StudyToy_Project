@@ -2,9 +2,11 @@ package com.study.comments.entity;
 
 import com.study.audit.Auditable;
 import com.study.member.entity.Member;
+import com.study.post.entity.Post;
 
 import javax.persistence.*;
 
+@Entity
 public class Comments extends Auditable {
 
     @Id

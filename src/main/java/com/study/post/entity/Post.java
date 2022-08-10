@@ -1,5 +1,7 @@
 package com.study.post.entity;
 
+import com.study.member.entity.Member;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -10,7 +12,7 @@ public class Post {
     private Long postId;
 
     @ManyToOne
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     @Column(nullable = false)
