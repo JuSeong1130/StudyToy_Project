@@ -24,7 +24,4 @@ public class Comments extends Auditable {
     private String content;
 
     private Long likeCount;
-
-
-
 }

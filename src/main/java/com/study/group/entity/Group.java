@@ -2,7 +2,7 @@ package com.study.group.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "GROUPS")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
