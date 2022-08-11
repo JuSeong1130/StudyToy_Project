@@ -1,8 +1,10 @@
 package com.study.member.controller;
 
 
+import com.study.member.dto.MemberPatchDto;
 import com.study.member.dto.MemberPostDto;
 import com.study.member.dto.MemberResponseDto;
+import com.study.member.dto.MemberRolePatchDto;
 import com.study.member.entity.Member;
 import com.study.member.mapper.MemberMapper;
 import com.study.member.service.MemberService;
@@ -30,11 +32,12 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity postMember(@Valid MemberPostDto requestBody){
+    public ResponseEntity postMember(@Valid @RequestBody MemberPostDto requestBody){
+        System.out.println("requestBody = " + requestBody);
         Member member = memberMapper.memberPostToMember(requestBody);
         member.setRole("ROLE_USER");
 
-        MemberResponseDto responseDto = memberMapper.memberToMemberResponseDto(memberService.createMember(memberMapper.memberPostToMember(requestBody)));
+        MemberResponseDto responseDto = memberMapper.memberToMemberResponseDto(memberService.createMember(member));
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
@@ -44,15 +47,19 @@ public class MemberController {
         return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(member),HttpStatus.OK);
     }
     @GetMapping
-    public ResponseEntity getMembers(@Positive @RequestParam int page, @Positive @RequestParam int size){
-        Page<Member> pageMembers = memberService.findMembers(page-1,size);
-        return new ResponseEntity<>(pageMembers,HttpStatus.OK);
+    public ResponseEntity getMembers(@Positive @RequestParam int page, @Positive @RequestParam int size) {
+        Page<Member> pageMembers = memberService.findMembers(page - 1, size);
+        return new ResponseEntity<>(pageMembers, HttpStatus.OK);
+    }
     
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") String memberId,
                                       @Valid @RequestBody MemberPatchDto requestBody) {
+
+        //requestBody = MemberPatchDto.builder().memberId(memberId).build();
+         requestBody.setMemberId(memberId);
         Member member = memberService.patchMember(memberMapper.memberPatchDtoToMember(requestBody));
-        return new ResponseEntity<>(memberMapper.memberToMemberResponse(member), HttpStatus.OK);
+        return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(member), HttpStatus.OK);
     }
 
     @PatchMapping("/{member-id}/role")

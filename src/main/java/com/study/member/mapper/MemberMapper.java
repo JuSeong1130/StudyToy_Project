@@ -2,6 +2,7 @@ package com.study.member.mapper;
 
 
 import com.study.member.dto.MemberPatchDto;
+import com.study.member.dto.MemberPostDto;
 import com.study.member.dto.MemberResponseDto;
 import com.study.member.dto.MemberRoleResponseDto;
 import com.study.member.entity.Member;

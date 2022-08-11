@@ -21,6 +21,9 @@ public class Member extends Auditable {
     private String phone;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -39,9 +42,10 @@ public class Member extends Auditable {
     }
 
     @Builder
-    public Member(String memberId, String phone, String email, String address, String password, String role,String image) {
+    public Member(String memberId, String phone, String name, String email, String address, String password, String role, String image) {
         this.memberId = memberId;
         this.phone = phone;
+        this.name = name;
         this.email = email;
         this.address = address;
         this.password = password;
