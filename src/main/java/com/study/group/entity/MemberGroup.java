@@ -1,14 +1,15 @@
 package com.study.group.entity;
 
+import com.study.audit.Auditable;
 import com.study.member.entity.Member;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
-public class MemberGroup {
+public class MemberGroup extends Auditable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberGroupId;
 
     @ManyToOne

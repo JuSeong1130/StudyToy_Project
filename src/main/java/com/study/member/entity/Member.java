@@ -4,17 +4,18 @@ import com.study.audit.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class Member extends Auditable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private String memberId;
 
     @Column(nullable = false)
     private String phone;
@@ -33,8 +34,9 @@ public class Member extends Auditable {
 
     private String image;
 
+
     @Builder
-    public Member(Long memberId, String phone, String email, String address, String password, String role,String image) {
+    public Member(String memberId, String phone, String email, String address, String password, String role,String image) {
         this.memberId = memberId;
         this.phone = phone;
         this.email = email;
