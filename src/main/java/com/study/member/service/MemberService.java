@@ -25,16 +25,17 @@ public class MemberService {
     }
      @Transactional
     public Member createMember(Member member){
-       memberRepository.findById(member.getMemberId()).orElseThrow(
-               ()-> new RuntimeException("이미 아이디가 있습니다.")
-       );
-       member =memberRepository.save(member);
+         Optional<Member> byId = memberRepository.findById(member.getMemberId());
+         if(byId.isPresent()){
+             throw new RuntimeException("이미 아이디가 있습니다.");
+         }
+         member =memberRepository.save(member);
        return member;
     }
     @Transactional
     public Member findMember(String memberId){
         Member member=memberRepository.findById(memberId).orElseThrow(
-                ()-> new RuntimeException("이미 아이디가 있습니다.")
+                ()-> new RuntimeException("아이디가 없습니다")
         );
         return member;
     }
@@ -51,10 +52,10 @@ public class MemberService {
 
     public Member patchMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
-
-        return beanUtils.copyNonNullProperties(member, findMember);
+        return memberRepository.save(beanUtils.copyNonNullProperties(member, findMember));
     }
 
+    @Transactional
     public Member patchMemberRole(String memberId, String role) {
         Member findMember = findVerifiedMember(memberId);
         findMember.changeRole(role);
