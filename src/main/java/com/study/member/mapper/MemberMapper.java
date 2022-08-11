@@ -1,5 +1,6 @@
 package com.study.member.mapper;
 
+
 import com.study.member.dto.MemberPatchDto;
 import com.study.member.dto.MemberResponseDto;
 import com.study.member.dto.MemberRoleResponseDto;
@@ -10,6 +11,8 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface MemberMapper {
     Member memberPatchDtoToMember(MemberPatchDto requestBody);
-    MemberResponseDto memberToMemberResponse(Member member);
+    MemberResponseDto memberToMemberResponseDto(Member member);
     MemberRoleResponseDto memberToMemberRoleResponseDto(Member member);
+    Member memberPostToMember(MemberPostDto postDto);
+
 }

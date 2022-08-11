@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
     @ManyToOne

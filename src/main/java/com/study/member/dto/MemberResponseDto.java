@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class MemberResponseDto {
-    private String id;
+    private String memberId;
     private String name;
     private String email;
     private String phone;

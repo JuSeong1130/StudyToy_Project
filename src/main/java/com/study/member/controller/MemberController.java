@@ -1,19 +1,26 @@
 package com.study.member.controller;
 
-import com.study.member.dto.MemberPatchDto;
-import com.study.member.dto.MemberRolePatchDto;
+
+import com.study.member.dto.MemberPostDto;
+import com.study.member.dto.MemberResponseDto;
 import com.study.member.entity.Member;
 import com.study.member.mapper.MemberMapper;
 import com.study.member.service.MemberService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+
 
 @RestController
 @RequestMapping("/v1/members")
+@Validated
 public class MemberController {
+
     private MemberService memberService;
     private MemberMapper memberMapper;
 
@@ -22,6 +29,25 @@ public class MemberController {
         this.memberMapper = memberMapper;
     }
 
+    @PostMapping
+    public ResponseEntity postMember(@Valid MemberPostDto requestBody){
+        Member member = memberMapper.memberPostToMember(requestBody);
+        member.setRole("ROLE_USER");
+
+        MemberResponseDto responseDto = memberMapper.memberToMemberResponseDto(memberService.createMember(memberMapper.memberPostToMember(requestBody)));
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{member-id}")
+    public ResponseEntity getMember(@PathVariable("member-id") String memberId){
+        Member member = memberService.findMember(memberId);
+        return new ResponseEntity<>(memberMapper.memberToMemberResponseDto(member),HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity getMembers(@Positive @RequestParam int page, @Positive @RequestParam int size){
+        Page<Member> pageMembers = memberService.findMembers(page-1,size);
+        return new ResponseEntity<>(pageMembers,HttpStatus.OK);
+    
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") String memberId,
                                       @Valid @RequestBody MemberPatchDto requestBody) {
