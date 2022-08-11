@@ -34,6 +34,9 @@ public class Member extends Auditable {
 
     private String image;
 
+    public void changeRole(String role) {
+        this.role = role;
+    }
 
     @Builder
     public Member(String memberId, String phone, String email, String address, String password, String role,String image) {

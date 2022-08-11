@@ -21,7 +21,7 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-    @Column(name = "groups" ,nullable = false)
+    @Column(name = "GROUPS", nullable = false)
     private String group;
 
     @Column(nullable = false)

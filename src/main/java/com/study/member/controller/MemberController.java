@@ -1,5 +1,6 @@
 package com.study.member.controller;
 
+
 import com.study.member.dto.MemberPostDto;
 import com.study.member.dto.MemberResponseDto;
 import com.study.member.entity.Member;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+
 
 @RestController
 @RequestMapping("/v1/members")
@@ -45,5 +47,24 @@ public class MemberController {
     public ResponseEntity getMembers(@Positive @RequestParam int page, @Positive @RequestParam int size){
         Page<Member> pageMembers = memberService.findMembers(page-1,size);
         return new ResponseEntity<>(pageMembers,HttpStatus.OK);
+    
+    @PatchMapping("/{member-id}")
+    public ResponseEntity patchMember(@PathVariable("member-id") String memberId,
+                                      @Valid @RequestBody MemberPatchDto requestBody) {
+        Member member = memberService.patchMember(memberMapper.memberPatchDtoToMember(requestBody));
+        return new ResponseEntity<>(memberMapper.memberToMemberResponse(member), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{member-id}/role")
+    public ResponseEntity patchMemberRole(@PathVariable("member-id") String memberId,
+                                          @RequestBody MemberRolePatchDto requestBody) {
+        Member member = memberService.patchMemberRole(memberId, requestBody.getRole());
+        return new ResponseEntity<>(memberMapper.memberToMemberRoleResponseDto(member), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{member-id}")
+    public ResponseEntity deleteMember(@PathVariable("member-id") String memberId) {
+        memberService.deleteMember(memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
