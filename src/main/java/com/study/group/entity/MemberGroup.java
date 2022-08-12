@@ -2,6 +2,7 @@ package com.study.group.entity;
 
 import com.study.audit.Auditable;
 import com.study.member.entity.Member;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -37,5 +38,13 @@ public class MemberGroup extends Auditable {
             this.groupRoleNumber = groupRoleNumber;
             this.groupRolePosition = groupRolePosition;
         }
+    }
+
+    @Builder
+    public MemberGroup(Long memberGroupId, Member member, Group group, GroupRole role) {
+        this.memberGroupId = memberGroupId;
+        this.member = member;
+        this.group = group;
+        this.role = role;
     }
 }

@@ -2,7 +2,7 @@ package com.study.comments.entity;
 
 import com.study.audit.Auditable;
 import com.study.member.entity.Member;
-import com.study.post.entity.Post;
+import com.study.post.entity.Posts;
 
 import javax.persistence.*;
 
@@ -19,7 +19,7 @@ public class Comments extends Auditable {
 
     @ManyToOne
     @JoinColumn(name="POST_ID")
-    private Post post;
+    private Posts posts;
 
     private String content;
 

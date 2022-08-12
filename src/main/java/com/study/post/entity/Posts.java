@@ -1,16 +1,19 @@
 package com.study.post.entity;
 
 import com.study.member.entity.Member;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
+@Getter
 @Entity
-public class Post {
+public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
+    @Setter
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
