@@ -1,6 +1,8 @@
 package com.study.post.service;
 
 
+import com.study.comments.entity.Comments;
+import com.study.comments.repository.CommentsRepository;
 import com.study.exception.BusinessLogicException;
 import com.study.exception.ExceptionCode;
 import com.study.post.entity.Posts;
@@ -15,7 +17,7 @@ import java.util.Optional;
 @Service
 public class PostsService {
 
-     private final PostsRepository postsRepository;
+    private final PostsRepository postsRepository;
 
     private final CustomBeanUtils<Posts> beanUtils;
 
@@ -25,7 +27,7 @@ public class PostsService {
     }
 
     public Posts createPost(Posts post) {
-        verifyExistsPost(post.getPostId());
+        //verifyExistsPost(post.getPostId());
         return postsRepository.save(post);
     }
 
@@ -34,7 +36,7 @@ public class PostsService {
     }
 
     public Page<Posts> findPosts(int page, int size) {
-        return postsRepository.findAll(PageRequest.of(page, size, Sort.by("postsId").descending()));
+        return postsRepository.findAll(PageRequest.of(page, size, Sort.by("postId").descending()));
     }
 
     private Posts findVerifiedPost(Long postsId) {
@@ -44,10 +46,10 @@ public class PostsService {
 
     private void verifyExistsPost(Long postsId) {
         Optional<Posts> posts = postsRepository.findById(postsId);
-        if(posts.isPresent())
+        if (posts.isPresent())
             throw new BusinessLogicException(ExceptionCode.POSTS_EXISTS);
+    }
 
-   
 
     public void deletePost(Long postsId) {
         Posts posts = postsRepository.findById(postsId).orElseThrow(() ->
@@ -62,7 +64,8 @@ public class PostsService {
         Posts findPosts = postsRepository.findById(posts.getPostId()).orElseThrow(() ->
                 new RuntimeException("게시글이 없습니다")
         );
-        return postsRepository.save(beanUtils.copyNonNullProperties(posts,findPosts));
+        return postsRepository.save(beanUtils.copyNonNullProperties(posts, findPosts));
 
-    
+
+    }
 }

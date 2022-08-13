@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/comments")
+@RequestMapping("/v1/posts")
 public class CommentsController {
 
     private final CommentsService commentsService;
@@ -24,7 +24,7 @@ public class CommentsController {
 
     //등록
     @PostMapping("/{post-id}/comments")
-    public ResponseEntity postComments(@PathVariable("{post-id}") Long postId,@RequestBody CommentsPostsDto requestBody){
+    public ResponseEntity postComments(@PathVariable("post-id") Long postId,@RequestBody CommentsPostsDto requestBody){
         Posts posts = new Posts();
         posts.setPostId(postId);
         requestBody.setPosts(posts);
@@ -35,7 +35,7 @@ public class CommentsController {
 
     //수정
     @PatchMapping("/{post-id}/comments/{comments-id}")
-    public ResponseEntity patchComments(@PathVariable("{post-id}") Long postId,@PathVariable("{comments-id") Long commentsId,@RequestBody CommentsPatchDto requestBody){
+    public ResponseEntity patchComments(@PathVariable("post-id") Long postId,@PathVariable("comments-id") Long commentsId,@RequestBody CommentsPatchDto requestBody){
         requestBody.setCommentsId(commentsId);
         Comments comments = commentsMapper.commentsPatchDtoToComments(requestBody);
         comments=commentsService.patchComments(comments);
@@ -43,7 +43,7 @@ public class CommentsController {
     }
     //삭제
     @DeleteMapping("/{post-id}/comments/{comments-id}")
-    public ResponseEntity deleteComments(@PathVariable("{post-id}") Long postId,@PathVariable("{comments-id") Long commentsId){
+    public ResponseEntity deleteComments(@PathVariable("post-id") Long postId,@PathVariable("comments-id") Long commentsId){
         String memberId ="aa";
         commentsService.deleteComments(memberId,commentsId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

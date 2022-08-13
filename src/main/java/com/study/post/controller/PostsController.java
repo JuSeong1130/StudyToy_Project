@@ -61,12 +61,12 @@ public class PostsController {
         return new ResponseEntity<>(postsMapper.postsToPostsResponseDto(posts), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{post-id}")
+    @DeleteMapping("/{posts-id}")
     public ResponseEntity deletePost(@PathVariable("posts-id") Long postsId){
         postsService.deletePost(postsId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-    @PatchMapping("/{post-id}")
+    @PatchMapping("/{posts-id}")
     public ResponseEntity patchPost(@PathVariable("posts-id") Long postsId, @RequestBody PostsPatchDto requestBody){
           Posts posts = postsMapper.postsPatchDtoToPosts(requestBody);
           posts.setPostId(postsId);
