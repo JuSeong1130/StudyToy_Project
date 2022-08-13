@@ -1,6 +1,8 @@
 package com.study.post.service;
 
 
+import com.study.comments.entity.Comments;
+import com.study.comments.repository.CommentsRepository;
 import com.study.exception.BusinessLogicException;
 import com.study.exception.ExceptionCode;
 import com.study.post.entity.Posts;
@@ -15,7 +17,7 @@ import java.util.Optional;
 @Service
 public class PostsService {
 
-     private final PostsRepository postsRepository;
+    private final PostsRepository postsRepository;
 
     private final CustomBeanUtils<Posts> beanUtils;
 
@@ -25,7 +27,8 @@ public class PostsService {
     }
 
     public Posts createPost(Posts post) {
-//        verifyExistsPost(post.getPostId());
+
+        //verifyExistsPost(post.getPostId());
         return postsRepository.save(post);
     }
 
@@ -48,7 +51,6 @@ public class PostsService {
             throw new BusinessLogicException(ExceptionCode.POSTS_EXISTS);
     }
 
-   
 
     public void deletePost(Long postsId) {
         Posts posts = postsRepository.findById(postsId).orElseThrow(() ->
@@ -64,6 +66,4 @@ public class PostsService {
         );
         return postsRepository.save(beanUtils.copyNonNullProperties(posts, findPosts));
     }
-
-    
 }

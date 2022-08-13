@@ -1,5 +1,6 @@
 package com.study.post.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.study.comments.entity.Comments;
 import com.study.member.entity.Member;
 import lombok.Getter;
@@ -37,6 +38,8 @@ public class Posts {
     @Column(nullable = false)
     private Boolean notification = false;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "posts")
     private List<Comments> comments =new ArrayList<>();
 
