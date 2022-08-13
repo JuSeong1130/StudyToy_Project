@@ -1,12 +1,19 @@
 package com.study.post.entity;
 
+import com.study.comments.entity.Comments;
 import com.study.member.entity.Member;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Post {
+@Setter
+@Getter
+public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -21,7 +28,8 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-    @Column(name = "GROUPS", nullable = false)
+
+    @Column(name = "GROUPS" ,nullable = false)
     private String group;
 
     @Column(nullable = false)
@@ -29,4 +37,7 @@ public class Post {
 
     @Column(nullable = false)
     private Boolean notification = false;
+
+    @OneToMany(mappedBy = "comments")
+    private List<Comments> comments =new ArrayList<>();
 }
