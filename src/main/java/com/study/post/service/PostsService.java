@@ -1,5 +1,6 @@
 package com.study.post.service;
 
+
 import com.study.exception.BusinessLogicException;
 import com.study.exception.ExceptionCode;
 import com.study.post.entity.Posts;
@@ -8,16 +9,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
+import com.study.utils.CustomBeanUtils;
 import java.util.Optional;
 
 @Service
 public class PostsService {
 
-    private PostsRepository postsRepository;
+     private final PostsRepository postsRepository;
 
-    public PostsService(PostsRepository postsRepository) {
+    private final CustomBeanUtils<Posts> beanUtils;
+
+    public PostsService(PostsRepository postsRepository, CustomBeanUtils<Posts> beanUtils) {
         this.postsRepository = postsRepository;
+        this.beanUtils = beanUtils;
     }
 
     public Posts createPost(Posts post) {
@@ -42,5 +46,23 @@ public class PostsService {
         Optional<Posts> posts = postsRepository.findById(postsId);
         if(posts.isPresent())
             throw new BusinessLogicException(ExceptionCode.POSTS_EXISTS);
+
+   
+
+    public void deletePost(Long postsId) {
+        Posts posts = postsRepository.findById(postsId).orElseThrow(() ->
+                new RuntimeException("게시글이 없습니다")
+        );
+        postsRepository.delete(posts);
     }
+
+
+    public Posts patchPost(Posts posts) {
+
+        Posts findPosts = postsRepository.findById(posts.getPostId()).orElseThrow(() ->
+                new RuntimeException("게시글이 없습니다")
+        );
+        return postsRepository.save(beanUtils.copyNonNullProperties(posts,findPosts));
+
+    
 }

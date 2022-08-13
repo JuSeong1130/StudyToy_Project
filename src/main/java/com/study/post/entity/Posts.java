@@ -1,19 +1,23 @@
 package com.study.post.entity;
 
+import com.study.comments.entity.Comments;
 import com.study.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Getter
 @Entity
+@Setter
+@Getter
 public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
-    @Setter
+
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -32,4 +36,8 @@ public class Posts {
 
     @Column(nullable = false)
     private Boolean notification = false;
+
+    @OneToMany(mappedBy = "comments")
+    private List<Comments> comments =new ArrayList<>();
+
 }

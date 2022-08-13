@@ -1,5 +1,6 @@
 package com.study.post.dto;
 
+
 import lombok.Builder;
 import lombok.Getter;
 
