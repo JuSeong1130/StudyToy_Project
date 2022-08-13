@@ -4,7 +4,6 @@ import com.study.comments.entity.Comments;
 import com.study.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ public class Posts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
+
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -28,8 +28,7 @@ public class Posts {
     @Column(nullable = false)
     private String content;
 
-
-    @Column(name = "GROUPS" ,nullable = false)
+    @Column(name = "GROUPS", nullable = false)
     private String group;
 
     @Column(nullable = false)
@@ -40,4 +39,5 @@ public class Posts {
 
     @OneToMany(mappedBy = "comments")
     private List<Comments> comments =new ArrayList<>();
+
 }
