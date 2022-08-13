@@ -19,7 +19,8 @@ public class CustomBeanUtils<T> {
 
         for (final Field property : source.getClass().getDeclaredFields()) {
             Object sourceProperty = src.getPropertyValue(property.getName());
-            if(sourceProperty != null && !(sourceProperty instanceof Collection<?>)) {
+            Object destinationProperty = dest.getPropertyValue(property.getName());
+            if(sourceProperty != null && !sourceProperty.equals(destinationProperty) && !(sourceProperty instanceof Collection<?>)) {
                 dest.setPropertyValue(property.getName(), sourceProperty);
             }
         }

@@ -23,7 +23,8 @@ public class Comments extends Auditable {
     private Long commnetsId;
 
     @ManyToOne
-    @JoinColumn(name="MEMBER_ID",nullable = false)
+    @JoinColumn(name="MEMBER_ID", nullable = false)
+
     private Member member;
     @JsonBackReference
     @ManyToOne
@@ -32,7 +33,8 @@ public class Comments extends Auditable {
 
     private String contents;
 
-    private Long likeCount=0L;
+    private Long likeCount = 0L;
+
 
     public void patchContent(String contents){
         this.contents=contents;

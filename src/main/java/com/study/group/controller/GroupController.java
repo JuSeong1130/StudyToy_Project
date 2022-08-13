@@ -1,5 +1,6 @@
 package com.study.group.controller;
 
+import com.study.group.dto.GroupPatchDto;
 import com.study.group.dto.GroupPostDto;
 import com.study.group.entity.Group;
 import com.study.group.mapper.GroupMapper;
@@ -23,8 +24,8 @@ public class GroupController {
     }
 
     @PostMapping
-    public ResponseEntity postGroup(@RequestBody GroupPostDto groupPostDto) {
-        Group group = groupService.createGroup(groupMapper.groupPostDtoToGroup(groupPostDto));
+    public ResponseEntity postGroup(@RequestBody GroupPostDto requestBody) {
+        Group group = groupService.createGroup(groupMapper.groupPostDtoToGroup(requestBody));
         return new ResponseEntity<>(groupMapper.groupToGroupResponseDto(group), HttpStatus.CREATED);
     }
 
@@ -45,5 +46,12 @@ public class GroupController {
     public ResponseEntity deleteGroup(@PathVariable("group-id") Long groupId) {
         groupService.deleteGroup(groupId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/{group-id}")
+    public ResponseEntity patchGroup(@PathVariable("group-id") Long groupId, @RequestBody GroupPatchDto groupPatchDto) {
+        groupPatchDto.setGroupId(groupId);
+        Group group = groupService.patchGroup(groupMapper.groupPatchDtoToGroup(groupPatchDto));
+        return new ResponseEntity<>(groupMapper.groupToGroupResponseDto(group), HttpStatus.OK);
     }
 }

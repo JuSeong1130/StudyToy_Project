@@ -38,6 +38,7 @@ public class Posts {
     @Column(nullable = false)
     private Boolean notification = false;
 
+
     @JsonManagedReference
     @OneToMany(mappedBy = "posts")
     private List<Comments> comments =new ArrayList<>();

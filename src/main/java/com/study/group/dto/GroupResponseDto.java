@@ -2,15 +2,15 @@ package com.study.group.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class GroupResponseDto {
-    String title;
     String teamName;
 
     @Builder
-    public GroupResponseDto(String title, String teamName) {
-        this.title = title;
+    public GroupResponseDto(String teamName) {
         this.teamName = teamName;
     }
 }

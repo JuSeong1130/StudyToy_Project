@@ -27,6 +27,7 @@ public class PostsService {
     }
 
     public Posts createPost(Posts post) {
+
         //verifyExistsPost(post.getPostId());
         return postsRepository.save(post);
     }
@@ -60,12 +61,9 @@ public class PostsService {
 
 
     public Posts patchPost(Posts posts) {
-
         Posts findPosts = postsRepository.findById(posts.getPostId()).orElseThrow(() ->
                 new RuntimeException("게시글이 없습니다")
         );
         return postsRepository.save(beanUtils.copyNonNullProperties(posts, findPosts));
-
-
     }
 }

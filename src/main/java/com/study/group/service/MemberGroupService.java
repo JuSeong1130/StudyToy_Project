@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MemberGroupService {
-    private MemberGroupRepository memberGroupRepository;
+    private final MemberGroupRepository memberGroupRepository;
 
     public MemberGroupService(MemberGroupRepository memberGroupRepository) {
         this.memberGroupRepository = memberGroupRepository;
