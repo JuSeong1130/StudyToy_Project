@@ -25,7 +25,7 @@ public class PostsService {
     }
 
     public Posts createPost(Posts post) {
-        verifyExistsPost(post.getPostId());
+//        verifyExistsPost(post.getPostId());
         return postsRepository.save(post);
     }
 
@@ -34,7 +34,7 @@ public class PostsService {
     }
 
     public Page<Posts> findPosts(int page, int size) {
-        return postsRepository.findAll(PageRequest.of(page, size, Sort.by("postsId").descending()));
+        return postsRepository.findAll(PageRequest.of(page, size, Sort.by("postId").descending()));
     }
 
     private Posts findVerifiedPost(Long postsId) {
@@ -44,8 +44,9 @@ public class PostsService {
 
     private void verifyExistsPost(Long postsId) {
         Optional<Posts> posts = postsRepository.findById(postsId);
-        if(posts.isPresent())
+        if (posts.isPresent())
             throw new BusinessLogicException(ExceptionCode.POSTS_EXISTS);
+    }
 
    
 
@@ -58,11 +59,11 @@ public class PostsService {
 
 
     public Posts patchPost(Posts posts) {
-
         Posts findPosts = postsRepository.findById(posts.getPostId()).orElseThrow(() ->
                 new RuntimeException("게시글이 없습니다")
         );
-        return postsRepository.save(beanUtils.copyNonNullProperties(posts,findPosts));
+        return postsRepository.save(beanUtils.copyNonNullProperties(posts, findPosts));
+    }
 
     
 }

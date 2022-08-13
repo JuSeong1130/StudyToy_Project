@@ -19,7 +19,7 @@ public class Comments extends Auditable {
     private Long commnetsId;
 
     @ManyToOne
-    @JoinColumn(name="MEMBER_ID")
+    @JoinColumn(name="MEMBER_ID", nullable = false)
     private Member member;
 
     @ManyToOne
@@ -28,7 +28,7 @@ public class Comments extends Auditable {
 
     private String content;
 
-    private Long likeCount;
+    private Long likeCount = 0L;
 
     public void patchContent(String content){
         this.content=content;

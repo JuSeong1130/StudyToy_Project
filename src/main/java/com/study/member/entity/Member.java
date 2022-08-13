@@ -1,5 +1,6 @@
 package com.study.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.audit.Auditable;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Member extends Auditable {
     private String address;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false)

@@ -26,7 +26,7 @@ public class Posts {
     private String title;
 
     @Column(nullable = false)
-    private String content;
+    private String contents;
 
     @Column(name = "GROUPS", nullable = false)
     private String group;
@@ -37,7 +37,7 @@ public class Posts {
     @Column(nullable = false)
     private Boolean notification = false;
 
-    @OneToMany(mappedBy = "comments")
+    @OneToMany(mappedBy = "posts")
     private List<Comments> comments =new ArrayList<>();
 
 }

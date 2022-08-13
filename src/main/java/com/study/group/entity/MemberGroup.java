@@ -1,13 +1,17 @@
 package com.study.group.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.audit.Auditable;
 import com.study.member.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@Getter
 public class MemberGroup extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +21,7 @@ public class MemberGroup extends Auditable {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private Group group;
