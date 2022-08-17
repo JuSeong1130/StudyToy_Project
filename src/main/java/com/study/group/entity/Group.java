@@ -29,6 +29,10 @@ public class Group extends Auditable {
     @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
     private final List<MemberGroup> memberGroup = new ArrayList<>();
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
+    private final List<ApplyGroup> applyGroups = new ArrayList<>();
+
     @Builder
     public Group(Long groupId, String teamName) {
         this.groupId = groupId;
