@@ -8,7 +8,8 @@ public enum ExceptionCode {
     POSTS_NOT_FOUND(404, "Posts not found"),
     POSTS_EXISTS(409, "Posts exists"),
     GROUP_NOT_FOUND(404, "Group not found"),
-    GROUP_EXISTS(409, "Group exists");
+    GROUP_EXISTS(409, "Group exists"),
+    APPLY_MEMBER_NOT_FOUND(404, "Group not found");
 
     @Getter
     private final int status;
