@@ -1,19 +1,24 @@
 package com.study.post.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.study.comments.entity.Comments;
 import com.study.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Getter
 @Entity
+@Setter
+@Getter
 public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
-    @Setter
+
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -22,7 +27,7 @@ public class Posts {
     private String title;
 
     @Column(nullable = false)
-    private String content;
+    private String contents;
 
     @Column(name = "GROUPS", nullable = false)
     private String group;
@@ -32,4 +37,10 @@ public class Posts {
 
     @Column(nullable = false)
     private Boolean notification = false;
+
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "posts")
+    private List<Comments> comments =new ArrayList<>();
+
 }
