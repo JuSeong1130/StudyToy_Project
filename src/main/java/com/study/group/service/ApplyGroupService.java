@@ -11,6 +11,7 @@ import com.study.member.service.MemberService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApplyGroupService {
@@ -50,6 +51,11 @@ public class ApplyGroupService {
         memberGroup = memberGroupService.addMember(memberGroup);
         applyGroupRepository.delete(applyGroup);
         return memberGroup;
+    }
+
+    public void deleteApplyMember(Long applicantId) {
+        ApplyGroup findApplyGroup = findVerifiedApplyGroup(applicantId);
+        applyGroupRepository.delete(findApplyGroup);
     }
 
     private ApplyGroup findVerifiedApplyGroup(Long applicantId) {

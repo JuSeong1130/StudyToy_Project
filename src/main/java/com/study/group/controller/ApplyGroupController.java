@@ -46,4 +46,10 @@ public class ApplyGroupController {
         return new ResponseEntity<>(memberGroupMapper.memberGroupToApplyGroupResponseDto(memberGroup), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("{applicant-id}")
+    public ResponseEntity deleteApplyMember(@PathVariable("applicant-id") Long applicantId) {
+        applyGroupService.deleteApplyMember(applicantId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
